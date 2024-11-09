@@ -1,12 +1,15 @@
 # Simple To-Do List Application
 This project is a simple To-Do List application built using React and Vite. The app allows users to add, delete, and mark tasks as completed, leveraging functional components, state, and props for efficient task management.
 
+# Author
+Sabyasachi Sahani 
+
 # Features
-Add new tasks
+1. Add new tasks
 
-Delete existing tasks
+2. Delete existing tasks
 
-Mark tasks as completed
+3. Mark tasks as completed
 
 # Technologies Used
 React
