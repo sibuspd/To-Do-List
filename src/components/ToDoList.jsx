@@ -1,11 +1,11 @@
-import React, {useState} from "react"
+import {useState} from "react"
 import ToDoItem from "./ToDoItem";
 import "./style.css"
 
 // THIS IS THE PARENT COMPONENT OF 'ToDoItem'. It handles the functionalities/features 
 function ToDoList(){
 
-    const [taskList, setTaskList] = useState(["1st task","2nd task","3rd task"]); // Empty array initially
+    const [taskList, setTaskList] = useState([{task:"1", status: false}, {task:"2", status: false}]); // Empty array initially
     const [newTask, setNewTask] = useState(""); // No task typed initially
     const [editStatus, setEditStatus] = useState(null); // to be used for toggling between Add/Edit
     const [buttonText, setButtonText] = useState('Add Task')
@@ -19,7 +19,7 @@ function ToDoList(){
         if(newTask.trim()) // Ensures the value if true after trimming all white spaces at both ends
             // ADDING OPERATION
             if(editStatus === null){
-                setTaskList(taskList=>[...taskList, newTask]); //NewArray with an extra added newTask
+                setTaskList(taskList=>[...taskList, {task: newTask, status: false}]); //NewArray with an extra added newTask
                 setNewTask(""); // Clears the searchbar after Adding a task
             }
             // EDITING OPERATION
@@ -34,7 +34,7 @@ function ToDoList(){
     }       
 
     function deleteTask(index){ // Callback for Delete button
-        const splicedTaskList = taskList.filter(task => task != taskList[index]);
+        const splicedTaskList = taskList.filter((task, i) => i != index);
         //Filter method to return all such tasks that don't match the to-be-deleted task
         setTaskList(splicedTaskList); // Update the taskList array with one task less.
     }
@@ -59,13 +59,19 @@ function ToDoList(){
         setTaskList(copyList); 
     }
     
-    function editTask(event,index){ // Callback for Editing a Task     
-       setNewTask(taskList[index]); 
+    function editTask(index){ // Callback for Editing a Task     
+       setNewTask(taskList[index].text); 
        // newTask is bound to input element's value as value = {newTask}
        // we are updating newTask to the value in taskList[index] which is a separate array.
        setButtonText("Update Task"); 
        setEditStatus(index); // NULL value of EditStatus is updated to index position for edit
        //Refer to AddTask() above
+    }
+
+    function markTask(index){
+        const copyOfTaskList = [...taskList];
+        copyOfTaskList[index].status = !copyOfTaskList[index].status; // False--> True and Vice-versa
+        setTaskList(copyOfTaskList);
     }
 // WE WILL PASS A PROP FROM THIS PARENT COMPONENT TO CHILD COMPONENT BY WRAPPING THE STATE VARIABLES, REFERENCE TO EVENT HANDLER FUNCTIONS & THE KEYS THEMSELVES. WE WILL PASS EACH PROP TO ITS CORRESPONDING TASK MODULE BY ITERATING OVER ENTIRE TASKLIST ARRAY BY USE OF MAP.
     return(
@@ -81,7 +87,7 @@ function ToDoList(){
                     {taskList.map((task, index) => 
                         <ToDoItem key={index} task={task} index={index} 
                                 moveUp={moveUp} moveDown={moveDown} 
-                                deleteTask={deleteTask} editTask={editTask} />
+                                deleteTask={deleteTask} editTask={editTask} markTask={markTask}/>
                     )}
                 </ol>
             </div>
