@@ -7,7 +7,7 @@ function ToDoItem({Task, index, moveUp, moveDown, deleteTask, editTask, markTask
     return(
         <>
             <li key={index}>
-                            <span className="span-text">{Task}</span>
+                            <span className="span-text">{Task.task}</span>
                             <button className="edit-button" onClick={()=>editTask(index)}>✏️   
                             </button>
                             <button className="delete-button" onClick={()=>deleteTask(index)}>Delete   

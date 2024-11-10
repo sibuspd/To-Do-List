@@ -71,6 +71,7 @@ function ToDoList(){
         const copyOfTaskList = [...taskList];
         copyOfTaskList[index].status = !copyOfTaskList[index].status; // False--> True and Vice-versa
         setTaskList(copyOfTaskList);
+        console.log(copyOfTaskList[index].status);
     }
 // WE WILL PASS A PROP FROM THIS PARENT COMPONENT TO CHILD COMPONENT BY WRAPPING THE STATE VARIABLES, REFERENCE TO EVENT HANDLER FUNCTIONS & THE KEYS THEMSELVES. WE WILL PASS EACH PROP TO ITS CORRESPONDING TASK MODULE BY ITERATING OVER ENTIRE TASKLIST ARRAY BY USE OF MAP.
     return(
@@ -84,7 +85,7 @@ function ToDoList(){
                 </div>
                 <ol>
                     {taskList.map((Task, index) => 
-                        <ToDoItem key={index} Task={Task.task} index={index} 
+                        <ToDoItem key={index} Task={Task} index={index} 
                                 moveUp={moveUp} moveDown={moveDown} 
                                 deleteTask={deleteTask} editTask={editTask} markTask={markTask}/>
                     )}
