@@ -8,9 +8,8 @@ function ToDoList(){
     const [taskList, setTaskList] = useState([{task:"1", status: false}, {task:"2", status: false}]); // Empty array initially
     const [newTask, setNewTask] = useState(""); // No task typed initially
     const [editStatus, setEditStatus] = useState(null); // to be used for toggling between Add/Edit
-    const [buttonText, setButtonText] = useState('Add Task')
-    // let buttonToggle = document.getElementsByClassName("add-button")[0]; //  AddTask button targeted
-    
+    const [buttonText, setButtonText] = useState('Add Task'); // To update the Button Text
+        
     function handleTypedString(event){ // Callback for input box typing
         setNewTask(event.target.value);    
     }
@@ -25,7 +24,7 @@ function ToDoList(){
             // EDITING OPERATION
             else if(editStatus !== null){
                 const affectedList = [...taskList]; // Copy of existing task list
-                affectedList[editStatus] = newTask; // Value present inside Input box
+                affectedList[editStatus] = {task: newTask, status: taskList[editStatus].status}; // Value present inside Input box
                 setTaskList(affectedList); // Mutates the TaskList (Updation after Editing)
                 setNewTask("");
                 setButtonText("Add Task");
@@ -34,7 +33,7 @@ function ToDoList(){
     }       
 
     function deleteTask(index){ // Callback for Delete button
-        const splicedTaskList = taskList.filter((task, i) => i != index);
+        const splicedTaskList = taskList.filter((task, i) => i !== index);
         //Filter method to return all such tasks that don't match the to-be-deleted task
         setTaskList(splicedTaskList); // Update the taskList array with one task less.
     }
@@ -60,7 +59,7 @@ function ToDoList(){
     }
     
     function editTask(index){ // Callback for Editing a Task     
-       setNewTask(taskList[index].text); 
+       setNewTask(taskList[index].task); 
        // newTask is bound to input element's value as value = {newTask}
        // we are updating newTask to the value in taskList[index] which is a separate array.
        setButtonText("Update Task"); 
@@ -84,8 +83,8 @@ function ToDoList(){
                     <button className="add-button" onClick={addTask}>{buttonText}</button>
                 </div>
                 <ol>
-                    {taskList.map((task, index) => 
-                        <ToDoItem key={index} task={task} index={index} 
+                    {taskList.map((Task, index) => 
+                        <ToDoItem key={index} Task={Task.task} index={index} 
                                 moveUp={moveUp} moveDown={moveDown} 
                                 deleteTask={deleteTask} editTask={editTask} markTask={markTask}/>
                     )}

@@ -2,12 +2,12 @@ import PropTypes from "prop-types"
 import "./style.css"
 // THIS IS THE CHILD COMPONENT OF 'ToDoList'. It displays the task list
 
-function ToDoItem({task, index, moveUp, moveDown, deleteTask, editTask, markTask}){
+function ToDoItem({Task, index, moveUp, moveDown, deleteTask, editTask, markTask}){
 // We have destructured the Props object to directly access the keys.
     return(
         <>
             <li key={index}>
-                            <span className="span-text">{task.task}</span>
+                            <span className="span-text">{Task}</span>
                             <button className="edit-button" onClick={()=>editTask(index)}>✏️   
                             </button>
                             <button className="delete-button" onClick={()=>deleteTask(index)}>Delete   
@@ -16,7 +16,7 @@ function ToDoItem({task, index, moveUp, moveDown, deleteTask, editTask, markTask
                             </button>
                             <button className="move-button" onClick={()=>moveDown(index)}> 🔽 
                             </button>
-                            <input className="mark-complete" type="checkbox" checked={task.status}
+                            <input className="mark-complete" type="checkbox" checked={Task.status}
                             onChange={()=>markTask(index)}/> 
             </li>
         </>
@@ -27,7 +27,7 @@ export default ToDoItem
 
 // VALIDATION OF ALL PROP KEYS RECEIVED
 ToDoItem.propTypes = {
-    task: PropTypes.shape({ 
+    Task: PropTypes.shape({ 
         task: PropTypes.string,
         status: PropTypes.bool,
         }),
