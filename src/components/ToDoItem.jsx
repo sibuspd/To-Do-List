@@ -17,7 +17,7 @@ function ToDoItem({Task, index, moveUp, moveDown, deleteTask, editTask, markTask
                             <button className="move-button" onClick={()=>moveDown(index)}> 🔽 
                             </button>
                             <input className="mark-complete" type="checkbox" checked={Task.status}
-                            onChange={()=>markTask(index)}/> 
+                            onChange={()=>markTask(index)} title="Mark as complete"/> 
             </li>
         </>
     )

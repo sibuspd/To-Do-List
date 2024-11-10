@@ -5,7 +5,7 @@ import "./style.css"
 // THIS IS THE PARENT COMPONENT OF 'ToDoItem'. It handles the functionalities/features 
 function ToDoList(){
 
-    const [taskList, setTaskList] = useState([{task:"1", status: false}, {task:"2", status: false}]); // Empty array of objects initially  - 
+    const [taskList, setTaskList] = useState([{task:"1", status: false}, {task:"2", status: false}, {task:"3", status: false}, {task:"4", status: false}]); // Empty array of objects initially  - 
     // Object will  2 properties - task, status
     const [newTask, setNewTask] = useState(""); // No task typed initially
     const [editStatus, setEditStatus] = useState(null); // to be used for toggling between Add/Edit
@@ -30,7 +30,9 @@ function ToDoList(){
                 setNewTask("");
                 setButtonText("Add Task");
                 setEditStatus(null);
-            } 
+            }
+            if(!newTask.trim())
+                alert("Please enter a task");
     }       
 
     function deleteTask(index){ // Callback for Delete button
