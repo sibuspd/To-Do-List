@@ -6,8 +6,8 @@ function ToDoItem({Task, index, moveUp, moveDown, deleteTask, editTask, markTask
 // We have destructured the Props object to directly access the keys.
     return(
         <>
-            <li key={index}>
-                            <span className="span-text">{Task.task}</span>
+            <li key={index} className={Task.status?'status-completed':''}>
+                            <span className={`span-text ${Task.status?'completed':''}`}>{Task.task}</span>
                             <button className="edit-button" onClick={()=>editTask(index)}>✏️   
                             </button>
                             <button className="delete-button" onClick={()=>deleteTask(index)}>Delete   

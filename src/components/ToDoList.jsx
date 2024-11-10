@@ -5,7 +5,8 @@ import "./style.css"
 // THIS IS THE PARENT COMPONENT OF 'ToDoItem'. It handles the functionalities/features 
 function ToDoList(){
 
-    const [taskList, setTaskList] = useState([{task:"1", status: false}, {task:"2", status: false}]); // Empty array initially
+    const [taskList, setTaskList] = useState([{task:"1", status: false}, {task:"2", status: false}]); // Empty array of objects initially  - 
+    // Object will  2 properties - task, status
     const [newTask, setNewTask] = useState(""); // No task typed initially
     const [editStatus, setEditStatus] = useState(null); // to be used for toggling between Add/Edit
     const [buttonText, setButtonText] = useState('Add Task'); // To update the Button Text
@@ -71,7 +72,6 @@ function ToDoList(){
         const copyOfTaskList = [...taskList];
         copyOfTaskList[index].status = !copyOfTaskList[index].status; // False--> True and Vice-versa
         setTaskList(copyOfTaskList);
-        console.log(copyOfTaskList[index].status);
     }
 // WE WILL PASS A PROP FROM THIS PARENT COMPONENT TO CHILD COMPONENT BY WRAPPING THE STATE VARIABLES, REFERENCE TO EVENT HANDLER FUNCTIONS & THE KEYS THEMSELVES. WE WILL PASS EACH PROP TO ITS CORRESPONDING TASK MODULE BY ITERATING OVER ENTIRE TASKLIST ARRAY BY USE OF MAP.
     return(
