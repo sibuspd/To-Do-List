@@ -128,3 +128,11 @@ li{
     background-color: lightgreen;
 }
 
+.header{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 3px 5px rgb(1, 1, 53);
+    margin-top: 8px;
+}
